@@ -102,12 +102,15 @@ blockquote em {
    =================================== */
 
 .hero {
-    height: 100vh;
+    min-height: 100vh;
+    /* 改為 min-height 防止內容溢出 */
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
+    padding: var(--space-lg) 0;
+    /* 增加上下內距 */
 }
 
 .hero-image {

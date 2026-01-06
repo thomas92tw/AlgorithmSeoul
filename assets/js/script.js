@@ -2,6 +2,12 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    // Force scroll to top on load to ensure Hero is visible
+    if (history.scrollRestoration) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     // Modal Logic
     const modal = document.getElementById('chapter-modal');
     const modalContent = document.getElementById('modal-content');
