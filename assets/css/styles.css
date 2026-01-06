@@ -169,11 +169,20 @@ blockquote em {
     font-weight: 400;
 }
 
-.hero-subtitle {
-    font-size: 1rem;
+.hero-subtitle-link {
+    font-size: 1.1rem;
     color: var(--color-text-dim);
     margin-bottom: var(--space-lg);
     font-weight: 300;
+    display: inline-block;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s;
+}
+
+.hero-subtitle-link:hover {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+    opacity: 1;
 }
 
 .hero-cta {
