@@ -2,11 +2,27 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    // Force scroll to top on load to ensure Hero is visible
-    if (history.scrollRestoration) {
-        history.scrollRestoration = 'manual';
+    // Force scroll to top logic
+    const forceScrollTop = () => {
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    };
+
+    // Execute immediately
+    forceScrollTop();
+
+    // Execute again after a small delay to override browser restoration
+    setTimeout(forceScrollTop, 100);
+
+    // Clear hash from URL without reloading
+    if (window.location.hash) {
+        history.replaceState(null, null, window.location.pathname);
+        forceScrollTop();
     }
-    window.scrollTo(0, 0);
 
     // Modal Logic
     const modal = document.getElementById('chapter-modal');
