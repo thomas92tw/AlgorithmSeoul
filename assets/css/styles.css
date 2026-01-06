@@ -1,0 +1,483 @@
+/* ===================================
+   Seoul 4D - Premium Dark Minimalism (Modal Version)
+   極簡高級暗黑風格 - 彈窗版
+   =================================== */
+
+:root {
+    /* Colors - Dark Premium */
+    --color-bg: #0a0a0a;
+    --color-bg-elevated: #111111;
+    --color-bg-card: #161616;
+    --color-text: #e8e8e8;
+    --color-text-dim: #888888;
+    --color-text-muted: #555555;
+    --color-accent: #00ff88;
+    --color-accent-dim: rgba(0, 255, 136, 0.15);
+    --color-border: #222222;
+    --color-overlay: rgba(0, 0, 0, 0.95);
+
+    /* Typography */
+    --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+    --space-xl: 8rem;
+
+    /* Sizes */
+    --max-width: 680px;
+    /* 限制內容寬度，製造兩側留白 */
+    --nav-height: 56px;
+}
+
+/* ===================================
+   Reset & Base
+   =================================== */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 15px;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text);
+    background: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+}
+
+body.modal-open {
+    overflow: hidden;
+    /* 彈窗開啟時禁止背景滾動 */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+/* No bold/italic */
+p strong,
+p em,
+blockquote strong,
+blockquote em {
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ===================================
+   Navigation - Hidden
+   =================================== */
+
+.nav {
+    display: none;
+}
+
+/* ===================================
+   Hero - Full Cover Background
+   =================================== */
+
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.4;
+}
+
+.hero-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, var(--color-bg) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 700px;
+    padding: var(--space-md);
+}
+
+.hero-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-accent);
+    padding: 6px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    margin-bottom: var(--space-md);
+    letter-spacing: 0.05em;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-sm);
+}
+
+.hero-title .highlight {
+    color: var(--color-accent);
+    font-weight: 400;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    color: var(--color-text-dim);
+    margin-bottom: var(--space-lg);
+    font-weight: 300;
+}
+
+.hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-bg);
+    background: var(--color-accent);
+    padding: 12px 24px;
+    border-radius: 6px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.hero-cta:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* ===================================
+   Table of Contents - Vertical Cards
+   =================================== */
+
+.toc {
+    padding: var(--space-xl) var(--space-md);
+    background: var(--color-bg);
+    min-height: 100vh;
+}
+
+.section-header {
+    max-width: var(--max-width);
+    margin: 0 auto var(--space-lg);
+    text-align: center;
+}
+
+.section-label {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-xs);
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+}
+
+.toc-grid {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.toc-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: block;
+    cursor: pointer;
+    text-align: left;
+}
+
+.toc-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.toc-card-image {
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    position: relative;
+}
+
+.toc-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.toc-card:hover .toc-card-image img {
+    transform: scale(1.05);
+}
+
+.toc-card-content {
+    padding: var(--space-md);
+}
+
+.toc-number {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+    display: block;
+}
+
+.toc-card h3 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: var(--color-text);
+}
+
+.toc-card .toc-subtitle {
+    font-size: 0.95rem;
+    color: var(--color-text-dim);
+    margin-bottom: var(--space-sm);
+}
+
+.toc-card .toc-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+}
+
+/* ===================================
+   Author Section
+   =================================== */
+
+.author-section {
+    padding: var(--space-xl) var(--space-md);
+    background: var(--color-bg);
+    text-align: center;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    border-top: 1px solid var(--color-border);
+}
+
+.author-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: var(--space-md);
+    color: var(--color-text);
+}
+
+.author-content p {
+    color: var(--color-text-dim);
+    margin-bottom: var(--space-xs);
+    font-size: 0.95rem;
+}
+
+.author-links {
+    margin-top: var(--space-md);
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+}
+
+.author-link {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+}
+
+.author-link:hover {
+    border-color: var(--color-accent);
+    opacity: 1;
+}
+
+/* ===================================
+   Footer
+   =================================== */
+
+.footer {
+    padding: var(--space-lg) var(--space-md);
+    text-align: center;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.footer-text {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+/* ===================================
+   Modal (Pop-up)
+   =================================== */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-bg);
+    z-index: 2000;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    padding: 0;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-close-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    color: var(--color-text);
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 2001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    transform: rotate(90deg);
+}
+
+.modal-content-wrapper {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-md);
+    min-height: 100vh;
+}
+
+/* Chapter Styles inside Modal */
+.chapter-header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.chapter-number {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+    display: block;
+}
+
+.chapter-title {
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: var(--space-xs);
+}
+
+.chapter-subtitle {
+    font-size: 1.2rem;
+    color: var(--color-text-dim);
+    font-weight: 300;
+    margin-bottom: var(--space-md);
+}
+
+.chapter-image {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: var(--space-lg);
+}
+
+.chapter-image img {
+    width: 100%;
+}
+
+.chapter-content p {
+    margin-bottom: var(--space-md);
+    font-size: 1.05rem;
+    line-height: 2;
+    color: var(--color-text-dim);
+    text-align: justify;
+}
+
+/* ===================================
+   Animations
+   =================================== */
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
